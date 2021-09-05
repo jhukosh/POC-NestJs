@@ -45,6 +45,8 @@ export class MessagesService {
     if (!message.id) {
       throw new NotFoundException({ messageId }, 'Message not found - unable to update');
     }
+    // 1- Copy old message in messages_history
+    // 2- Update message in message
     message.read = oldMessage.read;
     message.createdAt = oldMessage.createdAt;
     message.updatedAt = new Date();

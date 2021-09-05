@@ -57,15 +57,29 @@ $ npm run start:dev
 
 ```
 
-## Test
+## Requests to execute for the set-up
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+* POST http://127.0.0.1:3000/users (deux fois pour avoir au moins 2 users)
+```
+{
+    "name": "firstname",
+    "email": "toi@gmail.com",
+    "phoneNumber": "O606060606"
+}
+```
+* POST http://127.0.0.1:3000/messages/user/2 
+```
+{
+    "type": "EMAIL",
+    "content": "Hello world",
+    "receiverId": 1
+}
+```
+* POST http://127.0.0.1:3000/messages/user/1
+```
+{
+    "type": "EMAIL",
+    "content": "Hello world too",
+    "receiverId": 2
+}
 ```

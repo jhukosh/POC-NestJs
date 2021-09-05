@@ -28,7 +28,7 @@ export class MessagesService {
     });
   }
 
-  async getOneById(messageId: number, userId: number): Promise<Message> {
+  async getOneById(messageId: number): Promise<Message> {
     let message: Message;
     try {
       message = await this.messagesRepository.findOneOrFail(
@@ -37,7 +37,7 @@ export class MessagesService {
           select: ['id', 'content', 'senderId', 'createdAt'],
           relations: ['sender'],
           loadRelationIds: false,
-          where: [{ receiverId: userId }]
+          where: [{ id: messageId }]
         }
       );
     } catch (err) {
@@ -51,7 +51,6 @@ export class MessagesService {
 
   async createMessage(userId: number, message: Message): Promise<Message> {
     message.senderId = userId;
-    // message.receiverId = message.receiver;
     message.read = false;
     return await this.messagesRepository.save(message);
   }

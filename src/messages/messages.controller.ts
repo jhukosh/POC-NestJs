@@ -17,9 +17,9 @@ export class MessagesController {
       return this.messageService.getUserMessages(params.userId);
   }
 
-  @Get(':messageId/user/:userId')
+  @Get(':messageId')
   getOneById(@Param() params) {
-      return this.messageService.getOneById(params.messageId, params.userId);
+      return this.messageService.getOneById(params.messageId);
   }
 
   @Post('user/:userId')

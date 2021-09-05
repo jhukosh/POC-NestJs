@@ -7,7 +7,7 @@ export enum MessageType {
 }
 
 @Entity()
-export class MessageEntity {
+export class Message {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -17,7 +17,7 @@ export class MessageEntity {
     // default: MessageType.EMAIL,
     nullable: false,
   })
-  role: MessageType;
+  type: MessageType;
 
   @Column({
     type: 'varchar',
@@ -34,14 +34,10 @@ export class MessageEntity {
 
   @ManyToOne(type => User)
   @JoinColumn({ 
-    name: 'senderId'
+    name: 'receiverId'
   })
   receiver: number;
 
-  @Column({
-    type: 'timestamp',
-    // TODO put this to false
-    nullable: true,
-  })
+  @Column('date')
   createdAt: Date;
 }

@@ -1,38 +1,52 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Description
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### Contexte de l'application
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Pour une application de messageries interne à l'entreprise, nous souhaitons développer une API REST, permettant de lire, écrire, modifier et supprimer des messages.
 
-## Description
+Les messages seront de 2 types : SMS et email.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Un utilisateur sera en mesure de lire les messages qui lui ont été envoyés, d'y répondre et/ou de les supprimer.
+L'utilisateur pourra aussi envoyer un message à un autre utilisateur de l'application et aussi modifier celui-ci.
 
-## Installation
+Il n'est pas possible pour un utilisateur de lire/modifier/supprimer les messages destinés à un autre utilisateur.
 
-```bash
-$ npm install
-```
+Les messages comporteront au moins les informations suivantes :
+- le message
+- l'expéditeur
+- la date d'envoi.
 
-## Running the app
+## Fonctionnalités souhaitées
+- envoie de message
+- lecture de message
+- suppression de message
+- lister tous les messages
+- marquer un message comme lu
+
+### BONUS :
+- création d'utilisateur
+- login d'utilisateur
+- déconnexion
+- accès à la corbeille
+- répondre à un message spécifique
+- modification et historisation d'un message
+
+# Installation
+
+* You need to have **node** and **npm** installed https://nodejs.org/en/
+
+* You need to have MySQL installed. If your using macOS run :
+  - `brew install mysql`
+  - `brew services start mysql`
+  - To avoid security failures you can run `mysql_secure_installation` and follow instructions
+  - Run `mysql -u root -p` in your terminal, enter your password and finally run `CREATE DATABASE nest_messages;`
+  - To avoid database connection failures while running the app locally run `ALTER USER '<your_user>'@'localhost' IDENTIFIED WITH mysql_native_password BY '<your-password>';` and then `flush privileges;`
+
+* Configure the ORM by changing **username** and **password** with your information in the ormconfig.json.
+
+* Run `npm install`
+
+# Running the app
 
 ```bash
 # development
@@ -57,17 +71,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).

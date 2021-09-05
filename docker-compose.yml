@@ -18,11 +18,11 @@ services:
     container_name: backend_main
     restart: always
     build: .
-    # command: /bin/sh -c 'while !</dev/tcp/db/3306; do sleep 1; done; npm start'
+    # command: /bin/sh -c 'bin/wait-for-it.sh db:3306'
+    command: ["./wait-for-mysql.sh", "db:3306", "--", "npm", "start"]
     environment:
       - APP_ENV=development
       - APP_PORT=3000
-      - WAIT_HOSTS=mysql:3306
     volumes:
       - ./src:/var/www/back-end-main/src
       - ./test:/var/www/back-end-main/test

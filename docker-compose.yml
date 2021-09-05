@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  mysql:
+    container_name: main_mysql
+    restart: always
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=<password>
+      - MYSQL_DATABASE=nest_messages
+    expose:
+      - "3306"
+    ports:
+      - "3308:3306"
+    volumes:
+      - main_mysql_data:/var/lib/mysql
+  backend:
+    container_name: backend_main
+    restart: always
+    build: .
+    # command: /bin/sh -c 'while !</dev/tcp/db/3306; do sleep 1; done; npm start'
+    environment:
+      - APP_ENV=development
+      - APP_PORT=3000
+      - WAIT_HOSTS=mysql:3306
+    volumes:
+      - ./src:/var/www/back-end-main/src
+      - ./test:/var/www/back-end-main/test
+    working_dir: /var/www/back-end-main
+    ports:
+      - "9001:3000"
+    links:
+      - mysql
+    depends_on:
+      - mysql
+
+volumes:
+  main_mysql_data:
+
+networks:
+  backend_main:
+    driver: bridge

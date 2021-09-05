@@ -12,10 +12,10 @@ export class UsersService {
         return await this.usersRepository.find();
     }
 
-    async getUser(_id: number): Promise<User[]> {
+    async getUser(userId: number): Promise<User[]> {
         return await this.usersRepository.find({
-            select: ["fullName", "birthday", "isActive"],
-            where: [{ "id": _id }]
+            select: ["name", "email", "phoneNumber"],
+            where: [{ "id": userId }]
         });
     }
 

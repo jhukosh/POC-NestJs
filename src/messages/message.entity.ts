@@ -1,5 +1,5 @@
 import { User } from 'src/users/user.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 export enum MessageType {
   EMAIL = 'EMAIL',
@@ -25,6 +25,9 @@ export class Message {
     nullable: false,
   })
   content: string;
+  
+  @Column({ type: "int", nullable: true })
+  senderId: number;
 
   @ManyToOne(type => User)
   @JoinColumn({ 
@@ -32,12 +35,25 @@ export class Message {
   })
   sender: number;
 
+  @Column({type: "int", nullable: true })
+  receiverId: number;
+
   @ManyToOne(type => User)
   @JoinColumn({ 
     name: 'receiverId'
   })
   receiver: number;
 
-  @Column('date')
+  @Column({
+    type:'boolean',
+    nullable: false,
+    default: false
+  })
+  read: boolean;
+
+  @CreateDateColumn()
   createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

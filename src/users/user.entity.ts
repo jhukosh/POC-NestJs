@@ -1,17 +1,22 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn } from 'typeorm';
 
 @Entity()
 export class User {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column({ length: 25 })
+  name: string;
 
-    @Column({ length: 25 })
-    fullName:string;
+  @Column()
+  email: string;
 
-    @Column('date') 
-    birthday:Date;
+  @Column()
+  phoneNumber: string;
 
-    @Column() 
-    isActive:boolean;
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

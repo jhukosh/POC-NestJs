@@ -1,28 +1,54 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { Message } from './message.entity';
 import { MessagesService } from './messages.service';
 
 @Controller('messages')
 export class MessagesController {
 
-  constructor(private service: MessagesService) { }
+  constructor(private messageService: MessagesService) { }
 
   @Get()
-  get(@Param() params) {
-      return this.service.getAllMessages();
+  getAllMessages() {
+      return this.messageService.getAllMessages();
   }
 
-  @Get(':id')
+  @Get('user/:userId')
   getUserMessages(@Param() params) {
-      return this.service.getUserMessages(params.id);
+      return this.messageService.getUserMessages(params.userId);
   }
 
-  @Post(':id')
+  @Get(':messageId/user/:userId')
+  getOneById(@Param() params) {
+      return this.messageService.getOneById(params.messageId, params.userId);
+  }
+
+  @Post('user/:userId')
   create(
     @Param() params,
     @Body() message: Message
   ) {
-      return this.service.createMessage(params.id, message);
+      return this.messageService.createMessage(params.userId, message);
   }
 
+  @Put(':messageId/user/:userId')
+  updateMessageContent(
+    @Param() params,
+    @Body() message: Message
+  ): Promise<Message> {
+    return this.messageService.updateContent(params.messageId, params.userId, message);
+  }
+
+  @Put(':messageId/user/:userId/read')
+  markAsRead(
+    @Param() params
+  ): Promise<Message> {
+    return this.messageService.markAsRead(params.messageId, params.userId);
+  }
+
+  @Delete(':messageId/user/:userId')
+  deleteMessage(
+    @Param() params
+  ): boolean {
+    return !!this.messageService.deleteMessage(params.messageId, params.userId);
+  }
 }

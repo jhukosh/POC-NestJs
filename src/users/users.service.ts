@@ -5,29 +5,30 @@ import { User } from './user.entity';
 
 @Injectable()
 export class UsersService {
+  constructor(
+    @InjectRepository(User) private usersRepository: Repository<User>,
+  ) {}
 
-    constructor(@InjectRepository(User) private usersRepository: Repository<User>) { }
+  async getUsers(user: User): Promise<User[]> {
+    return await this.usersRepository.find();
+  }
 
-    async getUsers(user: User): Promise<User[]> {
-        return await this.usersRepository.find();
-    }
+  async getUser(userId: number): Promise<User[]> {
+    return await this.usersRepository.find({
+      select: ['name', 'email', 'phoneNumber'],
+      where: [{ id: userId }],
+    });
+  }
 
-    async getUser(userId: number): Promise<User[]> {
-        return await this.usersRepository.find({
-            select: ["name", "email", "phoneNumber"],
-            where: [{ "id": userId }]
-        });
-    }
+  async createUser(user: User) {
+    this.usersRepository.save(user);
+  }
 
-    async createUser(user: User) {
-      this.usersRepository.save(user);
-    }
+  async updateUser(user: User) {
+    this.usersRepository.save(user);
+  }
 
-    async updateUser(user: User) {
-        this.usersRepository.save(user);
-    }
-
-    async deleteUser(user: User) {
-        this.usersRepository.delete(user);
-    }
+  async deleteUser(user: User) {
+    this.usersRepository.delete(user);
+  }
 }

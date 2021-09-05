@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn } from 'typeorm';
+import { Message } from 'src/messages/message.entity';
+import { Entity, Column, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -13,6 +14,12 @@ export class User {
 
   @Column()
   phoneNumber: string;
+
+  @OneToMany( () => Message, message => message.senderId)
+  messagesSent: Message[];
+
+  @OneToMany( () => Message, message => message.receiverId)
+  messagesReceived: Message[];
 
   @CreateDateColumn()
   createdAt: Date;

@@ -20,6 +20,9 @@ export class MessagesHistory {
   @Column()
   originalId: number;
 
+  @Column()
+  originalContent: string;
+
   @CreateDateColumn()
   createdAt: Date;
 }

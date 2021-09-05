@@ -28,21 +28,19 @@ export class Message {
   
   @Column({ type: "int", nullable: true })
   senderId: number;
-
-  @ManyToOne(type => User)
+  @ManyToOne(() => User, user => user.messagesSent)
   @JoinColumn({ 
     name: 'senderId'
   })
-  sender: number;
+  sender: User;
 
   @Column({type: "int", nullable: true })
   receiverId: number;
-
-  @ManyToOne(type => User)
+  @ManyToOne(() => User, user => user.messagesReceived)
   @JoinColumn({ 
     name: 'receiverId'
   })
-  receiver: number;
+  receiver: User;
 
   @Column({
     type:'boolean',

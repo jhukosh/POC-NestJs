@@ -17,7 +17,7 @@ Les messages comporteront au moins les informations suivantes :
 - la date d'envoi.
 
 ## Fonctionnalités souhaitées
-- envoie de message
+- envoi de message
 - lecture de message
 - suppression de message
 - lister tous les messages

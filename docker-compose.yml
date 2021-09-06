@@ -6,7 +6,7 @@ services:
     restart: always
     image: mysql:5.7
     environment:
-      - MYSQL_ROOT_PASSWORD=<password>
+      - MYSQL_ROOT_PASSWORD=symetry88
       - MYSQL_DATABASE=nest_messages
     expose:
       - "3306"
@@ -14,12 +14,13 @@ services:
       - "3308:3306"
     volumes:
       - main_mysql_data:/var/lib/mysql
+      - create-db.sql:/docker-entrypoint-initdb.d/:ro
   backend:
     container_name: backend_main
     restart: always
     build: .
     # command: /bin/sh -c 'bin/wait-for-it.sh db:3306'
-    command: ["./wait-for-mysql.sh", "db:3306", "--", "npm", "start"]
+    # command: ["./wait-for-mysql.sh", "db:3306", "--", "npm", "start"]
     environment:
       - APP_ENV=development
       - APP_PORT=3000
@@ -36,6 +37,7 @@ services:
 
 volumes:
   main_mysql_data:
+  create-db.sql:
 
 networks:
   backend_main:

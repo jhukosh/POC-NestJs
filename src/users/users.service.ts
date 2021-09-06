@@ -9,12 +9,12 @@ export class UsersService {
     @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
 
-  async getUsers(user: User): Promise<User[]> {
+  async getUsers(): Promise<User[]> {
     return await this.usersRepository.find();
   }
 
-  async getUser(userId: number): Promise<User[]> {
-    return await this.usersRepository.find({
+  async getUser(userId: number): Promise<User> {
+    return await this.usersRepository.findOne({
       select: ['name', 'email', 'phoneNumber'],
       where: [{ id: userId }],
     });

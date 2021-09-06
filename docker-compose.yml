@@ -7,6 +7,7 @@ services:
     image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=symetry88
+      - MYSQL_USER=root
       - MYSQL_DATABASE=nest_messages
     expose:
       - "3306"
@@ -14,31 +15,34 @@ services:
       - "3308:3306"
     volumes:
       - main_mysql_data:/var/lib/mysql
-      - create-db.sql:/docker-entrypoint-initdb.d/:ro
-  backend:
-    container_name: backend_main
-    restart: always
-    build: .
-    # command: /bin/sh -c 'bin/wait-for-it.sh db:3306'
-    # command: ["./wait-for-mysql.sh", "db:3306", "--", "npm", "start"]
-    environment:
-      - APP_ENV=development
-      - APP_PORT=3000
-    volumes:
-      - ./src:/var/www/back-end-main/src
-      - ./test:/var/www/back-end-main/test
-    working_dir: /var/www/back-end-main
-    ports:
-      - "9001:3000"
-    links:
-      - mysql
-    depends_on:
-      - mysql
+      - ./create-db.sql:/docker-entrypoint-initdb.d/init.sql
+    command: 
+      --init-file /docker-entrypoint-initdb.d/init.sql
+  # backend:
+  #   container_name: backend_main
+  #   restart: always
+  #   build: .
+  #   # command: /bin/sh -c 'bin/wait-for-it.sh db:3306'
+  #   # command: ["./wait-for-mysql.sh", "db:3306", "--", "npm", "start"]
+  #    command: ["./wait-for-it.sh", "mysql:3306"]
+  #   environment:
+  #     - APP_ENV=development
+  #     - APP_PORT=3000
+  #   volumes:
+  #     - ./src:/var/www/back-end-main/src
+  #     - ./test:/var/www/back-end-main/test
+  #   working_dir: /var/www/back-end-main
+  #   ports:
+  #     - "9001:3000"
+  #   links:
+  #     - mysql
+  #   depends_on:
+  #     - mysql
 
 volumes:
   main_mysql_data:
-  create-db.sql:
+  # create-db.sql:
 
-networks:
-  backend_main:
-    driver: bridge
+# networks:
+#   backend_main:
+#     driver: bridge

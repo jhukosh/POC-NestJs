@@ -5,16 +5,21 @@ import { User } from './user.entity';
 @Controller('users')
 export class UsersController {
 
-    constructor(private service: UsersService) { }
+    constructor(private usersService: UsersService) { }
+
+    @Get()
+    getAllUsers(): Promise<User[]> {
+        return this.usersService.getUsers();
+    }
 
     @Get(':id')
-    get(@Param() params) {
-        return this.service.getUser(params.id);
+    getOneById(@Param() params): Promise<User> {
+        return this.usersService.getUser(params.id);
     }
 
     @Post()
     create(@Body() user: User) {
-        return this.service.createUser(user);
+        return this.usersService.createUser(user);
     }
 
     @Put(':id')
@@ -22,11 +27,11 @@ export class UsersController {
         @Param() params,
         @Body() user: User
     ) {
-        return this.service.updateUser(params.id, user);
+        return this.usersService.updateUser(params.id, user);
     }
 
     @Delete(':id')
     deleteUser(@Param() params) {
-        return this.service.deleteUser(params.id);
+        return this.usersService.deleteUser(params.id);
     }
 }

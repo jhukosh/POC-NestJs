@@ -6,7 +6,7 @@ services:
     restart: always
     image: mysql:5.7
     environment:
-      - MYSQL_ROOT_PASSWORD=symetry88
+      - MYSQL_ROOT_PASSWORD=<password>
       - MYSQL_USER=root
       - MYSQL_DATABASE=nest_messages
     expose:

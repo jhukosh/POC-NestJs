@@ -18,18 +18,20 @@ Les messages comporteront au moins les informations suivantes :
 
 ## Fonctionnalités souhaitées
 - ~~envoi de message~~
-- --lecture de message--
-- --suppression de message--
-- --lister tous les messages--
-- --marquer un message comme lu--
+- ~~lecture de message~~
+- ~~suppression de message~~
+- ~~lister tous les messages~~
+- ~~marquer un message comme lu~~
 
 ### BONUS :
-- --création d'utilisateur--
+- ~~création d'utilisateur~~
 - login d'utilisateur
 - déconnexion
 - accès à la corbeille
 - répondre à un message spécifique
-- --modification et historisation d'un message--
+- ~~modification et historisation d'un message~~
+
+**WIP** Docker (test-docker branch) : mysql is dockerize, running and creating DB with data but the connection to the host by the app is still refused.
 
 # Installation
 

@@ -42,7 +42,7 @@ Les messages comporteront au moins les informations suivantes :
   - Run `mysql -u root -p` in your terminal, enter your password and finally run `CREATE DATABASE nest_messages;`
   - To avoid database connection failures while running the app locally run `ALTER USER '<your_user>'@'localhost' IDENTIFIED WITH mysql_native_password BY '<your-password>';` and then `flush privileges;`
 
-* Configure the ORM by changing **username** and **password** with your information in the ormconfig.json.
+* Configure the ORM by changing the **password** in the ormconfig.json.
 
 * Run `npm install`
 

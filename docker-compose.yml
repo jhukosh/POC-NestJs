@@ -6,8 +6,10 @@ services:
     restart: always
     image: mysql:5.7
     environment:
-      - MYSQL_ROOT_PASSWORD=<password>
-      - MYSQL_USER=root
+      # - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_ROOT_HOST=%
+      # - MYSQL_USER=root
+      # - MYSQL_PASSWORD=password
       - MYSQL_DATABASE=nest_messages
     expose:
       - "3306"
@@ -43,6 +45,6 @@ volumes:
   main_mysql_data:
   # create-db.sql:
 
-# networks:
-#   backend_main:
-#     driver: bridge
+networks:
+  backend_main:
+    driver: bridge

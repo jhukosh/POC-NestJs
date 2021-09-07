@@ -17,7 +17,7 @@ Les messages comporteront au moins les informations suivantes :
 - la date d'envoi.
 
 ## Fonctionnalités souhaitées
-- --envoi de message--
+- -envoi de message-
 - --lecture de message--
 - --suppression de message--
 - --lister tous les messages--
@@ -42,7 +42,7 @@ Les messages comporteront au moins les informations suivantes :
   - Run `mysql -u <username> -p` in your terminal, enter your password and copy the **create_db.sql**.
   It will create the DB and two users.
 
-  #### Problem known 
+* Problem known 
 
  To avoid database connection failures while running the app locally run `ALTER USER '<your_user>'@'localhost' IDENTIFIED WITH mysql_native_password BY '<your-password>';` and then `flush privileges;`
 

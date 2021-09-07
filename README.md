@@ -17,32 +17,38 @@ Les messages comporteront au moins les informations suivantes :
 - la date d'envoi.
 
 ## Fonctionnalités souhaitées
-- envoi de message
-- lecture de message
-- suppression de message
-- lister tous les messages
-- marquer un message comme lu
+- ~~envoi de message~~
+- ~~lecture de message~~
+- ~~suppression de message~~
+- ~~lister tous les messages~~
+- ~~marquer un message comme lu~~
 
 ### BONUS :
-- création d'utilisateur
+- ~~création d'utilisateur~~
 - login d'utilisateur
 - déconnexion
 - accès à la corbeille
 - répondre à un message spécifique
-- modification et historisation d'un message
+- ~~modification et historisation d'un message~~
+
+**WIP** Docker (test-docker branch) : mysql is dockerize, running and creating DB with data but the connection to the host by the app is still refused.
 
 # Installation
 
 * You need to have **node** and **npm** installed https://nodejs.org/en/
 
-* You need to have MySQL installed. If your using macOS run :
+* You need to have MySQL installed. If you are using macOS run:
   - `brew install mysql`
   - `brew services start mysql`
   - To avoid security failures you can run `mysql_secure_installation` and follow instructions
-  - Run `mysql -u root -p` in your terminal, enter your password and finally run `CREATE DATABASE nest_messages;`
-  - To avoid database connection failures while running the app locally run `ALTER USER '<your_user>'@'localhost' IDENTIFIED WITH mysql_native_password BY '<your-password>';` and then `flush privileges;`
+  - Run `mysql -u <username> -p` in your terminal, enter your password and copy the **create_db.sql**.
+  It will create the DB and two users.
 
-* Configure the ORM by changing the **password** in the ormconfig.json.
+* Problem known 
+
+ To avoid database connection failures while running the app locally run `ALTER USER '<your_user>'@'localhost' IDENTIFIED WITH mysql_native_password BY '<your-password>';` and then `flush privileges;`
+
+* Configure the ORM by changing **username** (if not root) and **password** with your information in the **ormconfig.json**.
 
 * Run `npm install`
 
@@ -55,19 +61,4 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
